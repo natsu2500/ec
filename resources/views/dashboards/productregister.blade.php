@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container pb-5">
+<div class="container-fluid pr-5 pl-5 pb-5">
     @if(count($errors) > 0)
     <div class="bg-danger text-white mt-4 mb-2">
         <ul class="pt-2 pb-3 pl-3">
@@ -15,12 +15,12 @@
 
     @if(session('flash_message'))
     <div class="bg-info text-white mt-4 mb-2">
-        <p class="p-2b">{{session('flash_message')}}</p>
+        <p class="p-2">{{session('flash_message')}}</p>
     </div>
     @endif
 
-    <div class='h3 mt-3'>商品登録</div>
-    <form  action="/dashboard/productregister/add" method="POST" onSubmit="return check()">
+    <div class='h3 mt-4'>商品登録</div>
+    <form  action="/dashboard/productregister/add" method="POST" onSubmit="return check()" enctype="multipart/form-data">
     {{ csrf_field() }}
         <div class="row">
 
@@ -57,13 +57,6 @@
                     <input type="text" class="form-control @if($errors->has('model_number')) alert alert-danger border border-danger @endif" id="model_number" placeholder="model number" name="model_number" value="{{old('model_number')}}">
                 </div>
 
-                <div class="form-group">
-                    <label for="description">商品説明</label>
-                    <textarea class="form-control @if($errors->has('description')) alert alert-danger border border-danger @endif" id="description" rows="3" name="description">{{old('description')}}</textarea>
-                </div>
-            </div>
-
-            <div class="col-6">
                 <div>
                     <label for="main_category">カテゴリー</label>
                     <select class="form-control @if($errors->has('main_category')) alert alert-danger border border-danger @endif"  id="main_category" name="main_category" value="{{old('main_category')}}" @if($errors->has('main_category')) style = "padding: 0rem 1.25rem;" @endif>
@@ -81,7 +74,12 @@
                     </select>
                 </div>
 
-                <div class="form-group mt-3">
+
+            </div>
+
+            <div class="col-6">
+
+                <div class="form-group">
                     <label for="price">価格</label>
                     <input type="text" class="form-control @if($errors->has('price')) alert alert-danger border border-danger @endif" id="price" aria-describedby="emailHelp" placeholder="price" name="price" value="{{old('price')}}">
                 </div>
@@ -99,19 +97,39 @@
                     </div>
                 </div>
 
-                <div class="form-group mt-4">
+                <div class="form-group">
+                    <label for="description">商品説明</label>
+                    <textarea class="form-control @if($errors->has('description')) alert alert-danger border border-danger @endif" id="description" rows="3" name="description">{{old('description')}}</textarea>
+                </div>
+
+                <div class="form-group mt-4 mb-4">
                     <label for="main_product_image">メイン商品画像</label>
                     <input type="file" class="form-control-file" id="main_product_image" name="main_product_image" value="{{old('main_product_image')}}">
                 </div>
 
+                
                 <div class="form-group mt-4">
-                    <label for="sub_product_image_1">サブ商品画像</label>
+                    <label for="sub_product_image_1">サブ商品画像1</label>
                     <input type="file" class="form-control-file" id="sub_product_image_1" name="sub_product_image_1" value="{{old('sub_product_image_1')}}">
                 </div>
 
+                <div class="form-group mt-4">
+                    <label for="sub_product_image_1">サブ商品画像2</label>
+                    <input type="file" class="form-control-file" id="sub_product_image_2" name="sub_product_image_2" value="{{old('sub_product_image_2')}}">
+                </div>
 
-                <div class="form-group">
-                <button type="submit" class="btn btn-primary mx-auto d-block mt-5 pl-4 pr-4 pt-2 pb-2">登録</button>
+                <div class="form-group mt-4">
+                    <label for="sub_product_image_1">サブ商品画像3</label>
+                    <input type="file" class="form-control-file" id="sub_product_image_3" name="sub_product_image_3" value="{{old('sub_product_image_3')}}">
+                </div>
+
+                <div class="form-group mt-4">
+                    <label for="sub_product_image_1">サブ商品画像4</label>
+                    <input type="file" class="form-control-file" id="sub_product_image_4" name="sub_product_image_4" value="{{old('sub_product_image_4')}}">
+                </div>
+
+                <div class="form-group mt-5">
+                <button type="submit" class="btn btn-primary mx-auto d-block mt-5 pl-5 pr-5 pt-2 pb-2">登録</button>
                 </div>
             </div>
 
@@ -164,5 +182,7 @@
 
         });
       });
+
+
 </script>
 @endsection

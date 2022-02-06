@@ -17,9 +17,12 @@ Route::get('/', function () {
 
 // DashBoard top
 Route::get('/dashboard', 'DashBoardController@index');
-
+// DashBoard 商品一覧
+Route::get('/dashboard/productlist', 'ProductListController@index');
+// DashBoard 商品一覧詳細
+Route::get('/dashboard/productdetail/{id}', 'ProductListController@detail');
 // DashBoard 商品登録
 Route::get('/dashboard/productregister', 'ProductRegisterController@index');
 Route::post('/dashboard/productregister/add', 'ProductRegisterController@create');
-//DashBoard 商品登録 サブカテゴリー取得
+// DashBoard 商品登録 サブカテゴリー取得
 Route::get('/dashboard/productregister/subcategory', 'ProductRegisterController@getSubCategries');

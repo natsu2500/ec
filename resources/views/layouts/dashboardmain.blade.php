@@ -13,6 +13,7 @@
     <script src="{{ asset('/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('/bootstrap/popper.min.js') }}"></script>
     <script src="{{ asset('/js/dashboardmain.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <title>DsahBoard</title>
 </head>
 <body>

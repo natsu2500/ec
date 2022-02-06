@@ -7,6 +7,7 @@ use App\Model\Product;
 use App\Model\MainCategory;
 use App\Model\SubCategory;
 use App\Http\Requests\ProductRegisterRequest;
+use InterventionImage;
 
 
 class ProductRegisterController extends Controller
@@ -23,6 +24,30 @@ class ProductRegisterController extends Controller
     }
 
     public function create(ProductRegisterRequest $request){
+
+        $main_image = $request->file('main_product_image');
+
+        InterventionImage::make($main_image)
+	                        ->fit(750, 500)
+	                        ->save($main_image);
+
+        $main_image_path = isset($main_image) ? $main_image->store('images', 'public') : '';
+
+
+        for($i = 1; $i < 12; $i++){
+            if(!empty($request->file('sub_product_image_'.$i))){
+                ${"sub_image_".$i} = $request->file('sub_product_image_'.$i);
+    
+                InterventionImage::make(${"sub_image_".$i})
+                                    ->fit(750, 500)
+                                    ->save(${"sub_image_".$i});
+        
+                ${"sub_image_path_".$i} = isset(${"sub_image_".$i}) ? ${"sub_image_".$i}->store('images', 'public') : '';
+            } else{
+                ${"sub_image_path_".$i} = null;
+            };
+        };
+
         $product = new Product;
         $product->product_name = $request->product_name;
         $product->product_name_kana = $request->product_name_kana;
@@ -31,10 +56,11 @@ class ProductRegisterController extends Controller
         $product->description = $request->description;
         $product->main_category_id = $request->main_category;
         $product->sub_category_id = $request->sub_category;
-        $product->main_image = $request->main_product_image;
-        $product->sub_image_1 = $request->sub_product_image_1;
-        $product->sub_image_2 = $request->sub_product_image_2;
-        $product->sub_image_3 = $request->sub_product_image_3;
+        $product->main_image = $main_image_path;
+        $product->sub_image_1 = $sub_image_path_1;
+        $product->sub_image_2 = $sub_image_path_2;
+        $product->sub_image_3 = $sub_image_path_3;
+        $product->sub_image_4 = $sub_image_path_4;
         $product->price = $request->price;
         $product->start_date = $request->start_date;
         $product->end_date = $request->end_date;
