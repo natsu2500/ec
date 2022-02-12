@@ -14,13 +14,8 @@ class ProductRegisterController extends Controller
 {
     public function  index(){
 
-        $menus = app()->make('App\Http\Controllers\LayoutController');
-        $menus = $menus->menus();
-        $screens = app()->make('App\Http\Controllers\LayoutController');
-        $screens = $screens->screens();
-
         $main_categories = self::getMainCategries();
-        return view('/dashboards/productregister',['menus' => $menus ,'screens' => $screens , 'main_categories' => $main_categories]);
+        return view('/dashboards/productregister',['main_categories' => $main_categories]);
     }
 
     public function create(ProductRegisterRequest $request){

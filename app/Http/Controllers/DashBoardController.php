@@ -13,12 +13,7 @@ class DashBoardController extends Controller
      */
     public function index()
     {
-        $menus = app()->make('App\Http\Controllers\LayoutController');
-        $menus = $menus->menus();
-        $screens = app()->make('App\Http\Controllers\LayoutController');
-        $screens = $screens->screens();
-
-        return view('dashboard',['menus' => $menus ,'screens' => $screens]);
+        return view('dashboard',[]);
     }
 
     /**
